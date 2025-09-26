@@ -1,11 +1,11 @@
 import { Colors } from '@/app-example/constants/theme';
 import { Text, View, StyleSheet } from 'react-native';
 
-export default function AboutScreen(){
+export default function cientificaScreen(){
     return (
-        <view style={styles.container}>
+        <View style={styles.container}>
             <Text style={styles.text}>About screen</Text>
-        </view>
+        </View>
     );
 }
 
