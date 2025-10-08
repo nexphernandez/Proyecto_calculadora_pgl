@@ -27,4 +27,11 @@ export const globalStyles = StyleSheet.create({
         textAlign:'right',
         fontWeight: '300',
     },
+
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginBottom: 18,
+        paddingHorizontal: 10,
+    },
 })
