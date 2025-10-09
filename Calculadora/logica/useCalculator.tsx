@@ -14,6 +14,8 @@ export const useCalculator = () => {
     const [number,setNumber]=useState('0')
     const [prevNumber,setPrevNumber]=useState('0')
 
+    const [lastWasEqual, setLastWasEqual] = useState(false);
+
     const lastOperation = useRef<Operator>(undefined);
 
     useEffect(() =>{
@@ -77,21 +79,25 @@ export const useCalculator = () => {
     const divideOperation = () => {
         setLasNumber();
         lastOperation.current = Operator.divide;
+        setLastWasEqual(false);
     }
 
     const multiplyOperation = () => {
         setLasNumber();
         lastOperation.current = Operator.mutiply;
+        setLastWasEqual(false);
     }
 
     const subtractOperation = () => {
         setLasNumber();
         lastOperation.current = Operator.subtract;
+        setLastWasEqual(false);
     }
 
     const addOperation = () => {
         setLasNumber();
         lastOperation.current = Operator.add;
+        setLastWasEqual(false);
     }
 
     const calculateSubResult = () => {
@@ -120,15 +126,28 @@ export const useCalculator = () => {
 
     const calculateResult = () => {
 
-        const resuls = calculateSubResult();
-        setFormula(`${resuls}`);
+        const result = calculateSubResult();
+        setFormula(`${result}`);
 
         lastOperation.current = undefined;
         setPrevNumber('0');
 
+        setNumber(`${result}`);
+
+        setLastWasEqual(true);
+
     }
 
     const builNumber = ( numberString: string ) => {
+
+
+        if (lastWasEqual) {
+            setNumber(numberString);
+            setFormula(numberString);
+            setLastWasEqual(false);
+            return;
+        }
+
 
         if (number.includes('.')&& numberString === '.') return;
 
